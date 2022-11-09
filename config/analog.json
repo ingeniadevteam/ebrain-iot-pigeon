@@ -1,0 +1,29 @@
+{
+    "name": "AIO",
+    "outputs": [
+      {
+        "name": "AO1",
+        "init": 25,
+        "mask": 1
+      },
+      {
+        "name": "AO2",
+        "init": 25,
+        "mask": 2
+      }      
+    ],
+    "inputs": [
+      {
+        "name": "AI1"
+      },
+      {
+        "name": "AI2"
+      },
+      {
+        "name": "AI3"
+      },
+      {
+        "name": "AI4"
+      }
+    ]
+  }

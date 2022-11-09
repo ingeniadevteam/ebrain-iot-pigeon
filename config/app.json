@@ -1,0 +1,93 @@
+{
+    "enabled": [
+        "publish",
+        "startup",
+        "mqtt-thingsboard",
+        "pigeonio",
+        "analog",
+        "http",
+        "w1",
+        "pids"
+    ],
+    "publish": {
+        "cron": "*/30 * * * * *",
+        "data": false,
+        "job": false
+    },
+    "startup": {
+        "config": false
+    },
+    "mqtt-thingsboard": {
+        "queue": false,
+        "client": false,
+        "ready": false
+    },
+    "modbus": {
+        "cron": "*/30 * * * * *",
+        "data": false,
+        "job": false,
+        "config": false,
+        "reading": false,
+        "module": false,
+        "errors": false,
+        "queue": false,
+        "ready": false
+    },
+    "snmp": {
+        "cron": "*/30 * * * * *",
+        "data": false,
+        "job": false,
+        "config": false,
+        "reading": false,
+        "module": false,
+        "errors": false,
+        "queue": false,
+        "ready": false
+    },
+    "mqtt-zigbee": {
+        "data": false
+    },
+    "pigeonio": {
+        "config": false,
+        "data": false,
+        "state": false,
+        "emitter": false,
+        "read": false,
+        "write": false
+    },
+    "analog": {
+        "config": false,
+        "state": false,
+        "data": false,
+        "read": false,
+        "write": false
+    },
+    "http": {},
+    "bacnet": {
+        "cron": "*/30 * * * * *",
+        "data": false,
+        "job": false
+    },
+    "energy": {
+        "cron": "00 00 00 * * *",
+        "data": false,
+        "job": false
+    },
+    "meteo": {
+        "cron": "00 00 00 * * *",
+        "data": {
+            "current": false,
+            "forecast": false
+        },
+        "job": false
+    },
+    "w1": {
+        "config": false,
+        "cron": "*/30 * * * * *",
+        "data": false,
+        "job": false
+    },
+    "pids": {
+        "config": false
+    }
+}

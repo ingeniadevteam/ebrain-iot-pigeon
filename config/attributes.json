@@ -1,0 +1,9 @@
+{
+    "publish": "*/30 * * * * *",
+    "w1": "*/30 * * * * *",
+    "CONSIGNA": 32,
+    "VENTILACION MAXIMA": 100,
+    "OFFSET TEMPERATURA EXTERIOR": 0.5,
+    "OFFSET TEMPERATURA ARRANQUE MAQUINAS": 1,
+    "VENTILACION MINIMA": 25
+}

@@ -1,0 +1,87 @@
+{
+    "inputs": {
+      "ID1": {
+        "name": "ID1",
+        "edge": "falling"
+      },
+      "ID2": {
+        "name": "ID2",
+        "edge": "falling"
+      },
+      "ID3": {
+        "name": "ID3",
+        "edge": "falling"
+      },
+      "ID4": {
+        "name": "ID4",
+        "edge": "falling"
+      },
+      "I1+": {
+        "name": "I1+",
+        "edge": "falling"
+      },
+      "I2+": {
+        "name": "I2+",
+        "edge": "falling"
+      },
+      "I3+": {
+        "name": "I3+",
+        "edge": "falling"
+      },
+      "I4+": {
+        "name": "I4+",
+        "edge": "falling"
+      },
+      "I5+": {
+        "name": "I5+",
+        "edge": "falling"
+      },
+      "I6+": {
+        "name": "I6+",
+        "edge": "falling"
+      },
+      "I7+": {
+        "name": "I7+",
+        "edge": "falling"
+      },
+      "I8+": {
+        "name": "I8+",
+        "edge": "falling"
+      }
+    },
+    "outputs": {
+      "O1": {
+        "name": "O1",
+        "init": "high"
+      },
+      "O2": {
+        "name": "O2",
+        "init": "low"
+      },
+      "O3": {
+        "name": "O3",
+        "init": "high"
+      },
+      "O4": {
+        "name": "O4",
+        "init": "high"
+      },
+      "O5": {
+        "name": "O5",
+        "init": "high"
+      },
+      "O6": {
+        "name": "O6",
+        "init": "high"
+      },
+      "O7": {
+        "name": "O7",
+        "init": "high"
+      },
+      "O8": {
+        "name": "O8",
+        "init": "high"
+      }
+    }
+  }
+  
