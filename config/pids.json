@@ -1,13 +1,16 @@
 [
     {
-      "name": "PID1",
-      "kp": 0.5,    
-      "ki": 0.05,   
-      "kd": 0.1,    
-      "dt": 1000,   
-      "initial": 0, 
-      "target": 100,
-      "u_bound": 30,
-      "l_bound": -30
+      "name": "RIGHT",
+      "kp": 0.5,
+      "ki": 0.05,
+      "kd": 0.1,
+      "revese": true
+    },
+    {
+      "name": "LEFT",
+      "kp": 0.5,
+      "ki": 0.05,
+      "kd": 0.1,
+      "revese": true
     }
 ]

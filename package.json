@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./app.js",
-    "dev": "NODE_ENV=development node ./app.js"
+    "dev": "NODE_ENV=development node-dev ./app.js"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,7 @@
     "@clysema/ebrain-iot-analog": "^1.0.0",
     "@clysema/ebrain-iot-http": "^1.0.0",
     "@clysema/ebrain-iot-mqtt-thingsboard": "^1.0.0",
-    "@clysema/ebrain-iot-pids": "^1.0.0",
+    "@clysema/ebrain-iot-pids": "^2.0.1",
     "@clysema/ebrain-iot-pigeonio": "^1.0.0",
     "@clysema/ebrain-iot-publish": "^1.0.0",
     "@clysema/ebrain-iot-queues": "^1.0.0",
@@ -25,6 +25,7 @@
     "cron": "^1.8.2",
     "dotenv": "^10.0.0",
     "pino": "^6.13.3",
-    "pino-pretty": "^7.2.0"
+    "pino-pretty": "^7.2.0",
+    "round-to": "^4.1.0"
   }
 }

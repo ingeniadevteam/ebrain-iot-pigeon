@@ -10,7 +10,7 @@
         "pids"
     ],
     "publish": {
-        "cron": "*/30 * * * * *",
+        "cron": "* 0 * * * *",
         "data": false,
         "job": false
     },
