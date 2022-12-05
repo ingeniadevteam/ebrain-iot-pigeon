@@ -2,7 +2,7 @@
 
 The controller uses two PID controllers for fan control and an hysteresis
 controller for air conditioner control.
-
+```
   ┌───────────┬─────────────────────────────┬─────────┐
   │           ├─────────────────────────────┤         │
   │           │                             │         │
@@ -25,3 +25,4 @@ controller for air conditioner control.
   │                  ┌─────────────────┐              │
   │                  │┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼│              │
   └──────────────────┴─────────────────┴──────────────┘
+```
