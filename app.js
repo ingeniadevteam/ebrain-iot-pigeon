@@ -4,7 +4,6 @@ const round = require('round-to');
 const App = require('.');
 const pids = require('./pids');
 const acUnits = require('./ac_units');
-const vars = require('./vars');
 
 const nextRun = async (app, t) => {
     let next = 0;
@@ -30,8 +29,6 @@ async function main () {
         await pids.run(app);
         // run the AC Units
         await acUnits.run(app);
-        // setup device vars
-        vars(app);
 
         // setup next (accurate) run
         await nextRun(app, process.hrtime(t));

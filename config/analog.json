@@ -2,12 +2,12 @@
     "name": "AIO",
     "outputs": [
       {
-        "name": "AO1",
+        "name": "DERECHA",
         "init": 25,
         "mask": 1
       },
       {
-        "name": "AO2",
+        "name": "IZQUIERDA",
         "init": 25,
         "mask": 2
       }      

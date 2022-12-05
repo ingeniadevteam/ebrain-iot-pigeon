@@ -6,7 +6,6 @@ const Hysteresis = require('hysteresis')
 const init = async (app) => {
     app.ac_units = {
         AC1: {
-            state: 0,
             setpoint: app.attributes.CONSIGNA,
             offset: app.attributes['OFFSET TEMPERATURA ARRANQUE MAQUINAS'],
             output: 'ONOFF MAQUINA AUXILIAR 1',
@@ -16,7 +15,6 @@ const init = async (app) => {
             ])
         },
         AC2: {
-            state: 0,
             setpoint: app.attributes.CONSIGNA,
             offset: 2 * app.attributes['OFFSET TEMPERATURA ARRANQUE MAQUINAS'],
             output: 'ONOFF MAQUINA AUXILIAR 2',
@@ -60,16 +58,13 @@ const run = async (app) => {
             const Ac1Action = ['release', 'ignite'][Ac1DidCross - 1];
 
             if (Ac1Action === 'ignite') {
-                app.ac_units.AC1.state = 1;
+                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 1);
                 app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 1;
             } else {
-                app.ac_units.AC1.state = 0;
+                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 0);
                 app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
             }
-            console.log(
-                Ac1Action,
-                'AC1'
-            );
+            app.logger.info(`AC1 ${Ac1Action}`);
         }
         
         // check AC2
@@ -78,19 +73,15 @@ const run = async (app) => {
             const Ac2Action = ['release', 'ignite'][Ac2DidCross - 1];
 
             if (Ac2Action === 'ignite') {
-                app.ac_units.AC2.state = 1;
+                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 1);
                 app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 1;
             } else {
-                app.ac_units.AC2.state = 0;
+                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 0);
                 app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
             }
-            console.log(
-                Ac2Action,
-                'AC2'
-            );
+            app.logger.info(`AC2 ${Ac2Action}`);
         }
     }
-
 }
 
 

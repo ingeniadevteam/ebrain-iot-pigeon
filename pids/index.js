@@ -50,10 +50,12 @@ const run = async (app) => {
     if (app.w1.data) {
         const tRight = app.w1.data['TEMPERATURA DERECHA'];
         const tLeft = app.w1.data['TEMPERATURA IZQUIERDA'];
+        const tExt = app.w1.data['TEMPERATURA EXTERIOR'];
 
         // set device vars
         app.device.values['TEMPERATURA DERECHA'] = tRight;
         app.device.values['TEMPERATURA IZQUIERDA'] = tLeft;
+        app.device.values['TEMPERATURA EXTERIOR'] = tExt;
 
         // RIGHT PID
         if (!isNaN(tRight)) {
@@ -67,8 +69,9 @@ const run = async (app) => {
                     rout =  app.attributes['VENTILACION MINIMA'];
                 }
 
+                await app.analog.write(app, 'AIO', rout, 1);
                 app.device.values['VENTILACION DERECHA'] = rout;
-                console.log('RIGHT', tRight, rout);
+                app.logger.debug(`RIGHT ${tRight} => ${rout}`);
             }
         }
 
@@ -84,8 +87,9 @@ const run = async (app) => {
                     lout = app.attributes['VENTILACION MINIMA'];
                 }
 
+                await app.analog.write(app, 'AIO', lout, 2);
                 app.device.values['VENTILACION IZQUIERDA'] = lout;
-                console.log('LEFT ', tLeft, lout);
+                app.logger.debug(`LEFT  ${tLeft} => ${lout}`);
             }
         }
     }    
