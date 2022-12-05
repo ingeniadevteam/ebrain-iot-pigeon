@@ -21,6 +21,8 @@ async function main () {
     // init the AC Units
     acUnits.init(app);
 
+    console.log(app.ac);
+
     while (true) {
         // get the time for rate pourposes
         const t = process.hrtime();
@@ -30,8 +32,7 @@ async function main () {
         // run the AC Units
         acUnits.run(app);
 
-
-        // setup next run
+        // setup next (accurate) run
         await nextRun(app, process.hrtime(t));
     }
 };

@@ -43,6 +43,9 @@ const run = (app) => {
     // check PIDs reconfiguration
     checkReconfig(app);
 
+    // get AC ON condition
+    const AcOn = app.ac_units.AC1.state || app.ac_units.AC2.state;
+
     // run the pid if the temperatures are aviable
     if (app.w1.data) {
         const tRight = app.w1.data['TEMPERATURA DERECHA'];
@@ -55,7 +58,11 @@ const run = (app) => {
             // compute the RIGHT PID
             const rightPidOutput = app.pids.module.RIGHT.compute();
             if (rightPidOutput) {
-                console.log('RIGHT', tRight, round(rightPidOutput, 0));
+                if (AcOn) {
+                    console.log('RIGHT', tRight, app.attributes['VENTILACION MINIMA']);
+                } else {
+                    console.log('RIGHT', tRight, round(rightPidOutput, 0));
+                }
             }
         }
 
@@ -66,7 +73,11 @@ const run = (app) => {
             // compute the LEFT PID
             const leftPidOutput = app.pids.module.LEFT.compute();
             if (leftPidOutput) {
-                // console.log('LEFT ', tLeft, round(leftPidOutput, 0));
+                if (AcOn) {
+                    console.log('LEFT ', tLeft, app.attributes['VENTILACION MINIMA']);
+                } else {
+                    console.log('LEFT ', tLeft, round(leftPidOutput, 0));
+                }
             }
         }
     }    
