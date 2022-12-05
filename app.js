@@ -4,6 +4,7 @@ const round = require('round-to');
 const App = require('.');
 const pids = require('./pids');
 const acUnits = require('./ac_units');
+const vars = require('./vars');
 
 const nextRun = async (app, t) => {
     let next = 0;
@@ -17,20 +18,20 @@ async function main () {
     // create a new App
     const app = await App();
     // init the PIDs
-    pids.init(app);
+    await pids.init(app);
     // init the AC Units
-    acUnits.init(app);
-
-    console.log(app.ac);
+    await acUnits.init(app);
 
     while (true) {
         // get the time for rate pourposes
         const t = process.hrtime();
 
         // run the PIDs
-        pids.run(app);
+        await pids.run(app);
         // run the AC Units
-        acUnits.run(app);
+        await acUnits.run(app);
+        // setup device vars
+        vars(app);
 
         // setup next (accurate) run
         await nextRun(app, process.hrtime(t));

@@ -1,13 +1,13 @@
 {
-    "ts": 1670235990003,
+    "ts": 1670236950002,
     "values": {
         "alarm_count": 0,
         "ESTADO MAQUINA AUXILIAR 1": 0,
         "ESTADO MAQUINA AUXILIAR 2": 0,
         "TEMPERATURA EXTERIOR": 25.5,
-        "TEMPERATURA IZQUIERDA": 25.5,
-        "TEMPERATURA DERECHA": 25.5,
-        "VENTILACION IZQUIERDA": 0,
-        "VENTILACION DERECHA": 0
+        "TEMPERATURA IZQUIERDA": 30,
+        "TEMPERATURA DERECHA": 32,
+        "VENTILACION IZQUIERDA": 65,
+        "VENTILACION DERECHA": 75
     }
 }

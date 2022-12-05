@@ -3,7 +3,7 @@
 const round = require('round-to');
 const Hysteresis = require('hysteresis')
 
-const init = (app) => {
+const init = async (app) => {
     app.ac_units = {
         AC1: {
             state: 0,
@@ -45,7 +45,7 @@ const checkReconfig = (app) => {
     }
 }
 
-const run = (app) => {
+const run = async (app) => {
     // check reconfiguration
     checkReconfig(app);
 
@@ -61,8 +61,10 @@ const run = (app) => {
 
             if (Ac1Action === 'ignite') {
                 app.ac_units.AC1.state = 1;
+                app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 1;
             } else {
                 app.ac_units.AC1.state = 0;
+                app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
             }
             console.log(
                 Ac1Action,
@@ -77,8 +79,10 @@ const run = (app) => {
 
             if (Ac2Action === 'ignite') {
                 app.ac_units.AC2.state = 1;
+                app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 1;
             } else {
                 app.ac_units.AC2.state = 0;
+                app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
             }
             console.log(
                 Ac2Action,

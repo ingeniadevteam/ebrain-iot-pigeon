@@ -2,7 +2,7 @@
 
 const round = require('round-to');
 
-const init = (app) => {
+const init = async (app) => {
     // set pid target
     app.pids.module.RIGHT.setTarget(app.attributes.CONSIGNA);
     app.pids.module.LEFT.setTarget(app.attributes.CONSIGNA);
@@ -39,7 +39,7 @@ const checkReconfig = (app) => {
     }
 }
 
-const run = (app) => {
+const run = async (app) => {
     // check PIDs reconfiguration
     checkReconfig(app);
 
@@ -50,7 +50,11 @@ const run = (app) => {
     if (app.w1.data) {
         const tRight = app.w1.data['TEMPERATURA DERECHA'];
         const tLeft = app.w1.data['TEMPERATURA IZQUIERDA'];
-        
+
+        // set device vars
+        app.device.values['TEMPERATURA DERECHA'] = tRight;
+        app.device.values['TEMPERATURA IZQUIERDA'] = tLeft;
+
         // RIGHT PID
         if (!isNaN(tRight)) {
             // set new input into the RIGHT PID
@@ -58,11 +62,13 @@ const run = (app) => {
             // compute the RIGHT PID
             const rightPidOutput = app.pids.module.RIGHT.compute();
             if (rightPidOutput) {
+                let rout = round(rightPidOutput, 0);
                 if (AcOn) {
-                    console.log('RIGHT', tRight, app.attributes['VENTILACION MINIMA']);
-                } else {
-                    console.log('RIGHT', tRight, round(rightPidOutput, 0));
+                    rout =  app.attributes['VENTILACION MINIMA'];
                 }
+
+                app.device.values['VENTILACION DERECHA'] = rout;
+                console.log('RIGHT', tRight, rout);
             }
         }
 
@@ -73,11 +79,13 @@ const run = (app) => {
             // compute the LEFT PID
             const leftPidOutput = app.pids.module.LEFT.compute();
             if (leftPidOutput) {
+                let lout = round(leftPidOutput, 0);
                 if (AcOn) {
-                    console.log('LEFT ', tLeft, app.attributes['VENTILACION MINIMA']);
-                } else {
-                    console.log('LEFT ', tLeft, round(leftPidOutput, 0));
+                    lout = app.attributes['VENTILACION MINIMA'];
                 }
+
+                app.device.values['VENTILACION IZQUIERDA'] = lout;
+                console.log('LEFT ', tLeft, lout);
             }
         }
     }    
