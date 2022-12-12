@@ -22,6 +22,15 @@ const init = async (app) => {
                 app.attributes.CONSIGNA,
                 app.attributes.CONSIGNA + 2 * app.attributes['OFFSET TEMPERATURA ARRANQUE MAQUINAS']
             ])
+        },
+        AC3: {
+            setpoint: app.attributes.CONSIGNA,
+            offset: 2 * app.attributes['OFFSET TEMPERATURA ARRANQUE MAQUINAS'],
+            output: 'ONOFF MAQUINA AUXILIAR 3',
+            check: Hysteresis([
+                app.attributes.CONSIGNA,
+                app.attributes.CONSIGNA + 2 * app.attributes['OFFSET TEMPERATURA ARRANQUE MAQUINAS']
+            ])
         }
     }
 }
@@ -58,11 +67,19 @@ const run = async (app) => {
             const Ac1Action = ['release', 'ignite'][Ac1DidCross - 1];
 
             if (Ac1Action === 'ignite') {
-                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 1);
-                app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 1;
+                try {
+                    await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 0);
+                    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
+                } catch (error) {
+                    app.logger.error(error.message);
+                }
             } else {
-                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 0);
-                app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
+                try {
+                    await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 1);
+                    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 1;
+                } catch (error) {
+                    app.logger.error(error.message);
+                }
             }
             app.logger.info(`AC1 ${Ac1Action}`);
         }
@@ -73,13 +90,44 @@ const run = async (app) => {
             const Ac2Action = ['release', 'ignite'][Ac2DidCross - 1];
 
             if (Ac2Action === 'ignite') {
-                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 1);
-                app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 1;
+                try {
+                    await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 0);
+                    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
+                } catch (error) {
+                    app.logger.error(error.message);
+                }
             } else {
-                await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 0);
-                app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
+                try {
+                    await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 1);
+                    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 1;
+                } catch (error) {
+                    app.logger.error(error.message);
+                }
             }
             app.logger.info(`AC2 ${Ac2Action}`);
+        }
+
+        // check AC3
+        const Ac3DidCross = app.ac_units.AC3.check(Number(max));
+        if (Ac3DidCross) {
+            const Ac3Action = ['release', 'ignite'][Ac3DidCross - 1];
+
+            if (Ac3Action === 'ignite') {
+                try {
+                    await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 3', 0);
+                    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 0;
+                } catch (error) {
+                    app.logger.error(error.message);
+                }
+            } else {
+                try {
+                    await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 3', 1);
+                    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 1;
+                } catch (error) {
+                    app.logger.error(error.message);
+                }
+            }
+            app.logger.info(`AC3 ${Ac3Action}`);
         }
     }
 }

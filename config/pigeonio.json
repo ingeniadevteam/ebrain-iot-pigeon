@@ -31,7 +31,7 @@
       "init": "low"
     },
     "O3": {
-      "name": "none",
+      "name": "ONOFF MAQUINA AUXILIAR 3",
       "init": "high"
     },
     "O4": {
