@@ -4,6 +4,10 @@ const round = require('round-to');
 const Hysteresis = require('hysteresis')
 
 const init = async (app) => {
+    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
+    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
+    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 0;
+
     app.ac_units = {
         AC1: {
             setpoint: app.attributes.CONSIGNA,
@@ -59,6 +63,7 @@ const run = async (app) => {
     if (app.w1.data) {
         const tRight = app.w1.data['TEMPERATURA DERECHA'];
         const tLeft = app.w1.data['TEMPERATURA IZQUIERDA'];
+
         // get the max temperature
         const max = Math.max(...[tRight, tLeft]);
         // check AC1
@@ -69,14 +74,14 @@ const run = async (app) => {
             if (Ac1Action === 'ignite') {
                 try {
                     await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 0);
-                    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
+                    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 1;
                 } catch (error) {
                     app.logger.error(error.message);
                 }
             } else {
                 try {
                     await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 1', 1);
-                    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 1;
+                    app.device.values['ESTADO MAQUINA AUXILIAR 1'] = 0;
                 } catch (error) {
                     app.logger.error(error.message);
                 }
@@ -92,14 +97,14 @@ const run = async (app) => {
             if (Ac2Action === 'ignite') {
                 try {
                     await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 0);
-                    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
+                    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 1;
                 } catch (error) {
                     app.logger.error(error.message);
                 }
             } else {
                 try {
                     await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 2', 1);
-                    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 1;
+                    app.device.values['ESTADO MAQUINA AUXILIAR 2'] = 0;
                 } catch (error) {
                     app.logger.error(error.message);
                 }
@@ -115,14 +120,14 @@ const run = async (app) => {
             if (Ac3Action === 'ignite') {
                 try {
                     await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 3', 0);
-                    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 0;
+                    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 1;
                 } catch (error) {
                     app.logger.error(error.message);
                 }
             } else {
                 try {
                     await app.pigeonio.write('ONOFF MAQUINA AUXILIAR 3', 1);
-                    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 1;
+                    app.device.values['ESTADO MAQUINA AUXILIAR 3'] = 0;
                 } catch (error) {
                     app.logger.error(error.message);
                 }

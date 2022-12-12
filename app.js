@@ -2,6 +2,7 @@
 
 const round = require('round-to');
 const App = require('.');
+const modbusServer = require('./modbus-server');
 const pids = require('./pids');
 const acUnits = require('./ac_units');
 
@@ -16,6 +17,8 @@ const nextRun = async (app, t) => {
 async function main () {
     // create a new App
     const app = await App();
+    // init the modbus server
+    modbusServer(app, '0.0.0.0', 1502);
     // init the PIDs
     await pids.init(app);
     // init the AC Units
